@@ -1,79 +1,52 @@
-﻿{
+{
   "empresa": {
     "nombre": "BellaVila",
     "whatsapp": "5351234567",
     "ubicacion": "La Habana, Cuba",
     "email": "bellavila@gmail.com",
-    "horario": "Lunes a Sábado: 9:00 AM - 8:00 PM",
-    "mapa": "https://maps.google.com/?q=La+Habana+Cuba",
+    "horario": "Lunes a Sábado 9-8",
+    "mapa": "",
     "logo": ""
   },
   "carrusel": [
     {
-      "id": 1,
-      "imagen": "",
-      "titulo": "Pasteles Personalizados",
-      "subtitulo": "Diseños únicos para tus celebraciones",
+      "id": 1779578037900,
+      "imagen": "<a href='https://postimg.cc/rR5SZyy4' target='_blank'><img src='https://i.postimg.cc/SRvDsjwg/IMG-20260521-WA0021.jpg' border='0' alt='IMG-20260521-WA0021'></a>",
+      "titulo": "Descuentos para casi todos nuestros productos",
+      "subtitulo": "",
       "enlace": "#"
     },
     {
-      "id": 2,
-      "imagen": "",
-      "titulo": "Cupcakes Artesanales",
-      "subtitulo": "Sabores irresistibles",
+      "id": 1779578177436,
+      "imagen": "<a href='https://postimg.cc/bszDf935' target='_blank'><img src='https://i.postimg.cc/YqF1gXgt/IMG-20260417-WA0023.jpg' border='0' alt='IMG-20260417-WA0023'></a>",
+      "titulo": ".",
+      "subtitulo": "",
       "enlace": "#"
     },
     {
-      "id": 3,
-      "imagen": "",
-      "titulo": "Ofertas Especiales",
-      "subtitulo": "Descuentos exclusivos",
+      "id": 1779578229236,
+      "imagen": "<a href='https://postimg.cc/jWJC4gSP' target='_blank'><img src='https://i.postimg.cc/KY0LFCXq/IMG-20260225-WA0091.jpg' border='0' alt='IMG-20260225-WA0091'></a>",
+      "titulo": ".",
+      "subtitulo": "",
       "enlace": "#"
     }
   ],
-  "galeria": [
-    {
-      "id": 1,
-      "titulo": "Cake 50 años",
-      "categoria": "cumpleanos",
-      "imagen": "",
-      "descripcion": "Celebración de 50 años",
-      "oferta": false
-    },
-    {
-      "id": 2,
-      "titulo": "Cake floral boda",
-      "categoria": "boda",
-      "imagen": "",
-      "descripcion": "Cake temático para bodas",
-      "oferta": false
-    }
-  ],
+  "galeria": [],
   "productos": [
     {
-      "id": 1,
-      "nombre": "Red Velvet",
-      "precio": "3500 CUP",
-      "precio_oferta": null,
-      "descripcion": "Bizcocho suave de color rojo con crema de queso",
+      "id": 1779578419396,
+      "nombre": "Cake en forma de libro",
+      "precio": "40 USD",
+      "precio_oferta": "35 USD",
+      "descripcion": "Personalizado con imagenes comestibles / 2 biscochos 1 relleno\nMedidas 40cm*30cm",
       "destacado": true,
-      "oferta": false,
-      "imagen": ""
-    },
-    {
-      "id": 2,
-      "nombre": "Tres Leches",
-      "precio": "2800 CUP",
-      "precio_oferta": null,
-      "descripcion": "Esponjoso bizcocho remojado en tres leches",
-      "destacado": true,
-      "oferta": false,
-      "imagen": ""
+      "oferta": true,
+      "imagen": "<a href='https://postimg.cc/9rW1MSWN' target='_blank'><img src='https://i.postimg.cc/3JGqL5z7/IMG-20260225-WA0093.jpg' border='0' alt='IMG-20260225-WA0093'></a>"
     }
   ],
   "config": {
-    "instagram": "https://instagram.com/bellavila",
-    "facebook": "https://facebook.com/bellavila",
+    "instagram": "",
+    "facebook": "",
     "password": "1234"
   }
 }
