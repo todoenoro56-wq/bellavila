@@ -11,21 +11,21 @@
   "carrusel": [
     {
       "id": 1779578037900,
-      "imagen": "<a href='https://postimg.cc/rR5SZyy4' target='_blank'><img src='https://i.postimg.cc/SRvDsjwg/IMG-20260521-WA0021.jpg' border='0' alt='IMG-20260521-WA0021'></a>",
+      "imagen": "https://i.postimg.cc/SRvDsjwg/IMG-20260521-WA0021.jpg",
       "titulo": "Descuentos para casi todos nuestros productos",
       "subtitulo": "",
       "enlace": "#"
     },
     {
       "id": 1779578177436,
-      "imagen": "<a href='https://postimg.cc/bszDf935' target='_blank'><img src='https://i.postimg.cc/YqF1gXgt/IMG-20260417-WA0023.jpg' border='0' alt='IMG-20260417-WA0023'></a>",
+      "imagen": "https://i.postimg.cc/YqF1gXgt/IMG-20260417-WA0023.jpg",
       "titulo": ".",
       "subtitulo": "",
       "enlace": "#"
     },
     {
       "id": 1779578229236,
-      "imagen": "<a href='https://postimg.cc/jWJC4gSP' target='_blank'><img src='https://i.postimg.cc/KY0LFCXq/IMG-20260225-WA0091.jpg' border='0' alt='IMG-20260225-WA0091'></a>",
+      "imagen": "https://i.postimg.cc/KY0LFCXq/IMG-20260225-WA0091.jpg",
       "titulo": ".",
       "subtitulo": "",
       "enlace": "#"
@@ -41,7 +41,7 @@
       "descripcion": "Personalizado con imagenes comestibles / 2 biscochos 1 relleno\nMedidas 40cm*30cm",
       "destacado": true,
       "oferta": true,
-      "imagen": "<a href='https://postimg.cc/9rW1MSWN' target='_blank'><img src='https://i.postimg.cc/3JGqL5z7/IMG-20260225-WA0093.jpg' border='0' alt='IMG-20260225-WA0093'></a>"
+      "imagen": "https://i.postimg.cc/3JGqL5z7/IMG-20260225-WA0093.jpg"
     }
   ],
   "config": {
