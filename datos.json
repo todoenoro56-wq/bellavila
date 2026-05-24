@@ -1,7 +1,7 @@
 {
   "empresa": {
     "nombre": "BellaVila",
-    "whatsapp": "5351234567",
+    "whatsapp": "5353602613",
     "ubicacion": "La Habana, Cuba",
     "email": "bellavila@gmail.com",
     "horario": "Lunes a Sábado 9-8",
@@ -10,28 +10,52 @@
   },
   "carrusel": [
     {
-      "id": 1779578037900,
-      "imagen": "<a href='https://postimg.cc/rR5SZyy4' target='_blank'><img src='https://i.postimg.cc/SRvDsjwg/IMG-20260521-WA0021.jpg' border='0' alt='IMG-20260521-WA0021'></a>",
-      "titulo": "Descuentos para casi todos nuestros productos",
+      "id": 1779586307307,
+      "imagen": "https://i.postimg.cc/fLQMkjGC/IMG-20260521-WA0021.jpg",
+      "titulo": "DESCUENTO PARA LA MAYORIA DE NUESTROS PRODUCTOS",
       "subtitulo": "",
       "enlace": "#"
     },
     {
-      "id": 1779578177436,
-      "imagen": "<a href='https://postimg.cc/bszDf935' target='_blank'><img src='https://i.postimg.cc/YqF1gXgt/IMG-20260417-WA0023.jpg' border='0' alt='IMG-20260417-WA0023'></a>",
+      "id": 1779586358635,
+      "imagen": "https://i.postimg.cc/KY0LFCXq/IMG-20260225-WA0091.jpg",
+      "titulo": "SUPER OFERTAS",
+      "subtitulo": "",
+      "enlace": "#"
+    },
+    {
+      "id": 1779586393155,
+      "imagen": "https://i.postimg.cc/YqF1gXgt/IMG-20260417-WA0023.jpg",
       "titulo": ".",
       "subtitulo": "",
       "enlace": "#"
     },
     {
-      "id": 1779578229236,
-      "imagen": "<a href='https://postimg.cc/jWJC4gSP' target='_blank'><img src='https://i.postimg.cc/KY0LFCXq/IMG-20260225-WA0091.jpg' border='0' alt='IMG-20260225-WA0091'></a>",
-      "titulo": ".",
+      "id": 1779586969292,
+      "imagen": "https://i.postimg.cc/Fz2pQzdk/IMG-20260517-WA0015.jpg",
+      "titulo": "Sueño de Princesas",
       "subtitulo": "",
       "enlace": "#"
     }
   ],
-  "galeria": [],
+  "galeria": [
+    {
+      "id": 1779586768443,
+      "titulo": "Amor Eterno",
+      "categoria": "boda",
+      "imagen": "https://i.postimg.cc/KY0LFCXq/IMG-20260225-WA0091.jpg",
+      "descripcion": "",
+      "oferta": false
+    },
+    {
+      "id": 1779586836995,
+      "titulo": "Historia Perfecta",
+      "categoria": "cumpleanos",
+      "imagen": "https://i.postimg.cc/fLQMkjGC/IMG-20260521-WA0021.jpg",
+      "descripcion": "",
+      "oferta": false
+    }
+  ],
   "productos": [
     {
       "id": 1779578419396,
@@ -41,7 +65,7 @@
       "descripcion": "Personalizado con imagenes comestibles / 2 biscochos 1 relleno\nMedidas 40cm*30cm",
       "destacado": true,
       "oferta": true,
-      "imagen": "<a href='https://postimg.cc/9rW1MSWN' target='_blank'><img src='https://i.postimg.cc/3JGqL5z7/IMG-20260225-WA0093.jpg' border='0' alt='IMG-20260225-WA0093'></a>"
+      "imagen": "https://i.postimg.cc/3JGqL5z7/IMG-20260225-WA0093.jpg"
     },
     {
       "id": 1779585752122,
@@ -55,8 +79,8 @@
     }
   ],
   "config": {
-    "instagram": "",
-    "facebook": "",
+    "instagram": "https://www.instagram.com/claufig7?igsh=MTViaHp5eGllcWR6bA==",
+    "facebook": "https://www.facebook.com/share/1FmTsXedzT/",
     "password": "1234"
   }
 }
