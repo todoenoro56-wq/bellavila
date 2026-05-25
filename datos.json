@@ -50,6 +50,34 @@
       "titulo": ".",
       "subtitulo": "",
       "enlace": "#"
+    },
+    {
+      "id": 1779735526910,
+      "imagen": "https://i.postimg.cc/2511SLkq/grok-1772243607299.jpg",
+      "titulo": ".",
+      "subtitulo": "",
+      "enlace": "#"
+    },
+    {
+      "id": 1779735584510,
+      "imagen": "https://i.postimg.cc/hGXXtQDb/grok-1772243319392.jpg",
+      "titulo": ".",
+      "subtitulo": "",
+      "enlace": "#"
+    },
+    {
+      "id": 1779735667793,
+      "imagen": "https://i.postimg.cc/3wkkx084/grok-1772244166347.jpg",
+      "titulo": "Productos 100% natturales",
+      "subtitulo": "",
+      "enlace": "#"
+    },
+    {
+      "id": 1779735901946,
+      "imagen": "https://i.postimg.cc/fbGJ3qFX/image-52.jpg",
+      "titulo": ".",
+      "subtitulo": "",
+      "enlace": "#"
     }
   ],
   "galeria": [
@@ -130,6 +158,22 @@
       "titulo": "Cake Harry",
       "categoria": "cumpleanos",
       "imagen": "https://i.postimg.cc/85X1KxKr/IMG-20260225-WA0090.jpg",
+      "descripcion": "",
+      "oferta": false
+    },
+    {
+      "id": 1779735722128,
+      "titulo": "Aroma de vainilla",
+      "categoria": "cumpleanos",
+      "imagen": "https://i.postimg.cc/VN2drsvn/grok-1771613795672.jpg",
+      "descripcion": "",
+      "oferta": false
+    },
+    {
+      "id": 1779735816427,
+      "titulo": "Sexteto para compartir",
+      "categoria": "cumpleanos",
+      "imagen": "https://i.postimg.cc/3wkkx084/grok-1772244166347.jpg",
       "descripcion": "",
       "oferta": false
     }
