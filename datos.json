@@ -1,86 +1,40 @@
 {
   "empresa": {
     "nombre": "BellaVila",
-    "whatsapp": "5353602613",
+    "whatsapp": "5351234567",
     "ubicacion": "La Habana, Cuba",
     "email": "bellavila@gmail.com",
     "horario": "Lunes a Sábado 9-8",
     "mapa": "",
     "logo": ""
   },
-  "carrusel": [
-    {
-      "id": 1779586307307,
-      "imagen": "https://i.postimg.cc/fLQMkjGC/IMG-20260521-WA0021.jpg",
-      "titulo": "DESCUENTO PARA LA MAYORIA DE NUESTROS PRODUCTOS",
-      "subtitulo": "",
-      "enlace": "#"
-    },
-    {
-      "id": 1779586358635,
-      "imagen": "https://i.postimg.cc/KY0LFCXq/IMG-20260225-WA0091.jpg",
-      "titulo": "SUPER OFERTAS",
-      "subtitulo": "",
-      "enlace": "#"
-    },
-    {
-      "id": 1779586393155,
-      "imagen": "https://i.postimg.cc/YqF1gXgt/IMG-20260417-WA0023.jpg",
-      "titulo": ".",
-      "subtitulo": "",
-      "enlace": "#"
-    },
-    {
-      "id": 1779586969292,
-      "imagen": "https://i.postimg.cc/Fz2pQzdk/IMG-20260517-WA0015.jpg",
-      "titulo": "Sueño de Princesas",
-      "subtitulo": "",
-      "enlace": "#"
-    }
-  ],
-  "galeria": [
-    {
-      "id": 1779586768443,
-      "titulo": "Amor Eterno",
-      "categoria": "boda",
-      "imagen": "https://i.postimg.cc/KY0LFCXq/IMG-20260225-WA0091.jpg",
-      "descripcion": "",
-      "oferta": false
-    },
-    {
-      "id": 1779586836995,
-      "titulo": "Historia Perfecta",
-      "categoria": "cumpleanos",
-      "imagen": "https://i.postimg.cc/fLQMkjGC/IMG-20260521-WA0021.jpg",
-      "descripcion": "",
-      "oferta": false
-    }
-  ],
+  "carrusel": [],
+  "galeria": [],
   "productos": [
     {
-      "id": 1779578419396,
-      "nombre": "Cake en forma de libro",
-      "precio": "40 USD",
-      "precio_oferta": "35 USD",
-      "descripcion": "Personalizado con imagenes comestibles / 2 biscochos 1 relleno\nMedidas 40cm*30cm",
+      "id": 1779727679103,
+      "nombre": "Cakes de 2 pisos",
+      "precio": "65 USD",
+      "precio_oferta": "60 USD",
+      "descripcion": "Medidas \nBase /25 cm  de diámetro\nSuperior /15 cm \n6 bizcochos  y 4 rellenos ",
       "destacado": true,
       "oferta": true,
-      "imagen": "https://i.postimg.cc/3JGqL5z7/IMG-20260225-WA0093.jpg"
+      "imagen": "https://i.postimg.cc/Fz2pQzdk/IMG-20260517-WA0015.jpg"
     },
     {
-      "id": 1779585752122,
-      "nombre": "Cakes con botellas",
-      "precio": "45 USD",
-      "precio_oferta": "40 USD",
-      "descripcion": "MEDIDA 20CM *20CM \n3 RELLENOS 4 BIZCOCHOS \nBOTELLAS DE /VINO /SIDRA /RON /CERVEZA",
-      "destacado": true,
-      "oferta": true,
-      "imagen": "https://i.postimg.cc/Nfm7Hg2Z/IMG-20260521-WA0000.jpg"
+      "id": 1779727949527,
+      "nombre": "Cake de 3 pisos",
+      "precio": "80 USD",
+      "precio_oferta": null,
+      "descripcion": "Medidas\nBase 25 cm de diámetro \nSegundo 20 cm de diámetro \nSuperior 12 cm de diámetro \n9 bizcochos y 6 rellenos",
+      "destacado": false,
+      "oferta": false,
+      "imagen": "https://i.postimg.cc/MZ46y2f9/IMG-20260521-WA0022.jpg"
     }
   ],
   "config": {
-    "instagram": "https://www.instagram.com/claufig7?igsh=MTViaHp5eGllcWR6bA==",
-    "facebook": "https://www.facebook.com/share/1FmTsXedzT/",
+    "instagram": "",
+    "facebook": "",
     "password": "1234"
   }
 }
