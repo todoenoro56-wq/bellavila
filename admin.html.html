@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Admin - BellaVila</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #0a0a0a; color: #fff; padding: 20px; }
+        .header { background: #1a1a1a; padding: 15px; display: flex; justify-content: space-between; margin-bottom: 20px; border-radius: 10px; flex-wrap: wrap; gap: 10px; }
+        .logo-text { color: #C9A96E; font-size: 24px; }
+        .nav a { color: #fff; text-decoration: none; margin-left: 15px; }
+        .admin-container { max-width: 1000px; margin: 0 auto; }
+        .admin-title { text-align: center; color: #C9A96E; margin-bottom: 20px; }
+        .admin-tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .admin-tab { background: #2a2a2a; border: none; padding: 10px 20px; color: #fff; cursor: pointer; border-radius: 25px; }
+        .admin-tab.activo, .admin-tab:hover { background: #C9A96E; color: #000; }
+        .admin-seccion { display: none; background: #1a1a1a; padding: 20px; border-radius: 15px; margin-top: 10px; }
+        .admin-seccion.activa { display: block; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; color: #ccc; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; background: #2a2a2a; border: 1px solid #444; border-radius: 8px; color: #fff; }
+        .btn { background: #C9A96E; color: #000; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; margin-top: 10px; }
+        .btn-danger { background: #dc3545; color: #fff; }
+        .btn-success { background: #28a745; color: #fff; }
+        .btn-warning { background: #ffc107; color: #000; }
+        .btn-exportar { background: #2196F3; color: #fff; }
+        .lista-items { max-height: 400px; overflow-y: auto; margin-top: 20px; }
+        .item-admin { background: #2a2a2a; padding: 10px; margin: 10px 0; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .upload-area { border: 2px dashed #C9A96E; border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; margin-bottom: 10px; }
+        .preview-area { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+        .preview-mini { position: relative; width: 80px; height: 80px; }
+        .preview-mini img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; border: 2px solid #C9A96E; }
+        .preview-mini button { position: absolute; top: -8px; right: -8px; background: red; color: white; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; }
+        .instrucciones { background: #2a2a2a; border-left: 4px solid #C9A96E; padding: 15px; margin-bottom: 20px; border-radius: 10px; font-size: 13px; }
+        .modal-edicion {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            overflow: auto;
+            padding: 20px;
+        }
+        .modal-edicion-content {
+            background: #1a1a1a;
+            border: 1px solid #C9A96E;
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 550px;
+            margin: 50px auto;
+        }
+        .modal-edicion-content h3 { color: #C9A96E; margin-bottom: 20px; }
+        .modal-edicion-content input, .modal-edicion-content textarea, .modal-edicion-content select {
+            width: 100%; padding: 10px; margin: 8px 0; background: #2a2a2a; border: 1px solid #444; border-radius: 8px; color: #fff;
+        }
+        .recordatorio {
+            background: #ff9800;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #000;
+            font-weight: bold;
+        }
+        @media (max-width: 768px) { .header { flex-direction: column; text-align: center; } .admin-tab { padding: 8px 12px; } }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="logo-text">🔧 Admin - BellaVila</div>
+    <div class="nav"><a href="index.html">📱 Ver sitio</a></div>
+</div>
+
+<div class="admin-container">
+    <h1 class="admin-title">Panel de Administración</h1>
+
+    <div class="instrucciones">
+        💡 <strong>CÓMO USAR LAS IMÁGENES:</strong><br>
+        • Para usar imágenes externas (PostImage, ImgBB), pega el enlace en el campo "URL de la imagen"<br>
+        • Para subir imágenes desde tu dispositivo, usa el botón "Subir archivo"<br>
+        • Al hacer clic en "Editar" podrás modificar TODOS los campos
+    </div>
+
+    <div class="admin-tabs">
+        <button class="admin-tab" onclick="mostrarTab('empresa')">🏢 Empresa</button>
+        <button class="admin-tab" onclick="mostrarTab('carrusel')">🎠 Carrusel</button>
+        <button class="admin-tab" onclick="mostrarTab('galeria')">📸 Galería</button>
+        <button class="admin-tab" onclick="mostrarTab('productos')">🍰 Productos</button>
+        <button class="admin-tab" onclick="mostrarTab('config')">⚙️ Configuración</button>
+        <button class="admin-tab" onclick="mostrarTab('exportar')">📤 Exportar</button>
+    </div>
+
+    <!-- EMPRESA -->
+    <div id="tab-empresa" class="admin-seccion activa">
+        <h3>🏢 Información de la Empresa</h3>
+        <div class="form-group">
+            <label>🖼️ LOGO</label>
+            <div style="background: #2a2a2a; padding: 15px; border-radius: 12px;">
+                <p style="margin-bottom: 10px;">📌 URL externa:</p>
+                <input type="text" id="logoUrl" placeholder="https://i.postimg.cc/XXXXXX/logo.png">
+                <p style="margin: 10px 0;">📁 O subir archivo:</p>
+                <div class="upload-area" onclick="document.getElementById('logoFile').click()">📤 Haz click para seleccionar imagen</div>
+                <input type="file" id="logoFile" accept="image/*" style="display:none" onchange="previewLogoArchivo(this)">
+            </div>
+            <div id="logoPreview" class="preview-area"></div>
+        </div>
+        <div class="form-group"><label>🏷️ Nombre</label><input type="text" id="empNombre" placeholder="BellaVila"></div>
+        <div class="form-group"><label>📱 WhatsApp</label><input type="text" id="empWhatsapp" placeholder="5351234567"></div>
+        <div class="form-group"><label>📍 Ubicación</label><input type="text" id="empUbicacion" placeholder="La Habana, Cuba"></div>
+        <div class="form-group"><label>✉️ Email</label><input type="email" id="empEmail" placeholder="bellavila@gmail.com"></div>
+        <div class="form-group"><label>🕐 Horario</label><input type="text" id="empHorario" placeholder="Lunes a Sábado 9-8"></div>
+        <div class="form-group"><label>🗺️ Mapa URL</label><input type="text" id="empMapa" placeholder="https://maps.google.com/..."></div>
+        <button class="btn" onclick="guardarEmpresa()">💾 Guardar cambios</button>
+    </div>
+
+    <!-- CARRUSEL -->
+    <div id="tab-carrusel" class="admin-seccion">
+        <h3>🎠 Agregar slide</h3>
+        <div class="form-group"><label>📷 URL imagen</label><input type="text" id="carImagenUrl" placeholder="https://..."></div>
+        <div class="form-group"><label>📁 Subir archivo</label><div class="upload-area" onclick="document.getElementById('carImagenFile').click()">📤 Seleccionar</div><input type="file" id="carImagenFile" accept="image/*" style="display:none" onchange="previewCarArchivo(this)"><div id="carPreview" class="preview-area"></div></div>
+        <div class="form-group"><label>📝 Título</label><input type="text" id="carTitulo" placeholder="Ej: Pasteles Personalizados"></div>
+        <div class="form-group"><label>📄 Subtítulo</label><input type="text" id="carSubtitulo" placeholder="Descubre nuestras creaciones"></div>
+        <div class="form-group"><label>🔗 Enlace</label><input type="text" id="carEnlace" placeholder="#"></div>
+        <button class="btn btn-success" onclick="agregarCarrusel()">➕ Agregar slide</button>
+        <h3>📋 Slides actuales</h3>
+        <div id="listaCarrusel" class="lista-items"></div>
+    </div>
+
+    <!-- GALERÍA -->
+    <div id="tab-galeria" class="admin-seccion">
+        <h3>📸 Agregar foto</h3>
+        <div class="form-group"><label>📷 URL imagen</label><input type="text" id="galImagenUrl" placeholder="https://..."></div>
+        <div class="form-group"><label>📁 Subir archivo</label><div class="upload-area" onclick="document.getElementById('galImagenFile').click()">📤 Seleccionar</div><input type="file" id="galImagenFile" accept="image/*" style="display:none" onchange="previewGalArchivo(this)"><div id="galPreview" class="preview-area"></div></div>
+        <div class="form-group"><label>📝 Título</label><input type="text" id="galTitulo" placeholder="Ej: Cake 50 años"></div>
+        <div class="form-group"><label>🏷️ Categoría</label><select id="galCategoria"><option value="cumpleanos">🎂 Cumpleaños</option><option value="boda">💍 Boda</option><option value="baby-shower">👶 Baby Shower</option><option value="corporativo">🏢 Corporativo</option></select></div>
+        <div class="form-group"><label>📄 Descripción</label><input type="text" id="galDescripcion" placeholder="Descripción"></div>
+        <div class="form-group"><label><input type="checkbox" id="galOferta"> 🎁 Oferta</label></div>
+        <button class="btn btn-success" onclick="agregarGaleria()">➕ Agregar foto</button>
+        <h3>📋 Fotos (<span id="galeriaCantidad">0</span>)</h3>
+        <div id="listaGaleria" class="lista-items"></div>
+    </div>
+
+    <!-- PRODUCTOS -->
+    <div id="tab-productos" class="admin-seccion">
+        <h3>🍰 Agregar producto</h3>
+        <div class="form-group"><label>📷 URL imagen</label><input type="text" id="prodImagenUrl" placeholder="https://..."></div>
+        <div class="form-group"><label>📁 Subir archivo</label><div class="upload-area" onclick="document.getElementById('prodImagenFile').click()">📤 Seleccionar</div><input type="file" id="prodImagenFile" accept="image/*" style="display:none" onchange="previewProdArchivo(this)"><div id="prodPreview" class="preview-area"></div></div>
+        <div class="form-group"><label>📝 Nombre</label><input type="text" id="prodNombre" placeholder="Ej: Red Velvet"></div>
+        <div class="form-group"><label>💰 Precio</label><input type="text" id="prodPrecio" placeholder="3500 CUP"></div>
+        <div class="form-group"><label>🏷️ Precio oferta</label><input type="text" id="prodPrecioOferta" placeholder="2900 CUP (opcional)"></div>
+        <div class="form-group"><label>📄 Descripción</label><textarea id="prodDescripcion" rows="3" placeholder="Descripción del producto"></textarea></div>
+        <div class="form-group"><label><input type="checkbox" id="prodDestacado"> ⭐ Destacado</label></div>
+        <div class="form-group"><label><input type="checkbox" id="prodOferta"> 🎁 En oferta</label></div>
+        <button class="btn btn-success" onclick="agregarProducto()">➕ Agregar producto</button>
+        <h3>📋 Productos (<span id="productosCantidad">0</span>)</h3>
+        <div id="listaProductos" class="lista-items"></div>
+    </div>
+
+    <!-- CONFIGURACIÓN -->
+    <div id="tab-config" class="admin-seccion">
+        <h3>⚙️ Configuración</h3>
+        <div class="form-group"><label>📷 Instagram URL</label><input type="text" id="confInstagram" placeholder="https://instagram.com/..."></div>
+        <div class="form-group"><label>📘 Facebook URL</label><input type="text" id="confFacebook" placeholder="https://facebook.com/..."></div>
+        <div class="form-group"><label>🔑 Nueva contraseña</label><input type="password" id="confPassword" placeholder="Nueva contraseña"></div>
+        <button class="btn" onclick="guardarConfiguracion()">💾 Guardar</button>
+    </div>
+
+    <!-- EXPORTAR -->
+    <div id="tab-exportar" class="admin-seccion">
+        <div class="recordatorio">
+            ⚠️ <strong>RECUERDA:</strong> Después de hacer cambios, haz clic en "GUARDAR Y EXPORTAR" y sube el archivo a GitHub.
+        </div>
+        <h3>📤 Exportar datos</h3>
+        <p>Exporta todos los datos a un archivo JSON y súbelo a GitHub.</p>
+        
+        <!-- BOTÓN NUEVO: GUARDAR Y EXPORTAR -->
+        <button class="btn btn-exportar" onclick="guardarYExportar()" style="background: #2196F3; font-weight: bold;">
+            💾 GUARDAR Y EXPORTAR
+        </button>
+        
+        <button class="btn" onclick="exportarDatos()">📤 EXPORTAR SOLO</button>
+        <button class="btn" onclick="importarDatos()" style="background:#2196F3;">📥 Importar datos</button>
+        <button class="btn btn-danger" onclick="resetearTodo()">🗑️ RESETEAR TODO</button>
+        
+        <p style="margin-top: 15px; font-size: 12px; color: #aaa;">
+            🔹 <strong>GUARDAR Y EXPORTAR:</strong> Guarda los cambios en tu navegador Y descarga el archivo datos.json actualizado.<br>
+            🔹 Luego sube el archivo a GitHub (reemplazando el anterior).
+        </p>
+    </div>
+</div>
+
+<!-- MODALES DE EDICIÓN -->
+<div id="modalEditarProducto" class="modal-edicion">
+    <div class="modal-edicion-content">
+        <h3>✏️ Editar Producto</h3>
+        <input type="hidden" id="editProductoIndex">
+        <div class="form-group"><label>📷 URL imagen</label><input type="text" id="editProdImagen" placeholder="https://..."></div>
+        <div class="form-group"><label>📁 Nueva imagen</label><div class="upload-area" onclick="document.getElementById('editProdImagenFile').click()">📤 Seleccionar</div><input type="file" id="editProdImagenFile" accept="image/*" style="display:none"></div>
+        <div class="form-group"><label>📝 Nombre</label><input type="text" id="editProdNombre"></div>
+        <div class="form-group"><label>💰 Precio</label><input type="text" id="editProdPrecio"></div>
+        <div class="form-group"><label>🏷️ Precio oferta</label><input type="text" id="editProdPrecioOferta"></div>
+        <div class="form-group"><label>📄 Descripción</label><textarea id="editProdDescripcion" rows="3"></textarea></div>
+        <div class="form-group"><label><input type="checkbox" id="editProdDestacado"> ⭐ Destacado</label></div>
+        <div class="form-group"><label><input type="checkbox" id="editProdOferta"> 🎁 En oferta</label></div>
+        <button class="btn-success" onclick="guardarEdicionProducto()">💾 Guardar</button>
+        <button class="btn" onclick="cerrarModalEdicion('modalEditarProducto')">Cancelar</button>
+    </div>
+</div>
+
+<div id="modalEditarCarrusel" class="modal-edicion">
+    <div class="modal-edicion-content">
+        <h3>✏️ Editar Slide</h3>
+        <input type="hidden" id="editCarruselIndex">
+        <div class="form-group"><label>📷 URL imagen</label><input type="text" id="editCarImagen" placeholder="https://..."></div>
+        <div class="form-group"><label>📁 Nueva imagen</label><div class="upload-area" onclick="document.getElementById('editCarImagenFile').click()">📤 Seleccionar</div><input type="file" id="editCarImagenFile" accept="image/*" style="display:none"></div>
+        <div class="form-group"><label>📝 Título</label><input type="text" id="editCarTitulo"></div>
+        <div class="form-group"><label>📄 Subtítulo</label><input type="text" id="editCarSubtitulo"></div>
+        <div class="form-group"><label>🔗 Enlace</label><input type="text" id="editCarEnlace"></div>
+        <button class="btn-success" onclick="guardarEdicionCarrusel()">💾 Guardar</button>
+        <button class="btn" onclick="cerrarModalEdicion('modalEditarCarrusel')">Cancelar</button>
+    </div>
+</div>
+
+<div id="modalEditarGaleria" class="modal-edicion">
+    <div class="modal-edicion-content">
+        <h3>✏️ Editar Foto</h3>
+        <input type="hidden" id="editGaleriaIndex">
+        <div class="form-group"><label>📷 URL imagen</label><input type="text" id="editGalImagen" placeholder="https://..."></div>
+        <div class="form-group"><label>📁 Nueva imagen</label><div class="upload-area" onclick="document.getElementById('editGalImagenFile').click()">📤 Seleccionar</div><input type="file" id="editGalImagenFile" accept="image/*" style="display:none"></div>
+        <div class="form-group"><label>📝 Título</label><input type="text" id="editGalTitulo"></div>
+        <div class="form-group"><label>🏷️ Categoría</label><select id="editGalCategoria"><option value="cumpleanos">🎂 Cumpleaños</option><option value="boda">💍 Boda</option><option value="baby-shower">👶 Baby Shower</option><option value="corporativo">🏢 Corporativo</option></select></div>
+        <div class="form-group"><label>📄 Descripción</label><input type="text" id="editGalDescripcion"></div>
+        <div class="form-group"><label><input type="checkbox" id="editGalOferta"> 🎁 Oferta</label></div>
+        <button class="btn-success" onclick="guardarEdicionGaleria()">💾 Guardar</button>
+        <button class="btn" onclick="cerrarModalEdicion('modalEditarGaleria')">Cancelar</button>
+    </div>
+</div>
+
+<script>
+    let datos = {
+        empresa: { nombre: "BellaVila", whatsapp: "5351234567", ubicacion: "La Habana, Cuba", email: "bellavila@gmail.com", horario: "Lunes a Sábado 9-8", mapa: "", logo: "" },
+        carrusel: [],
+        galeria: [],
+        productos: [],
+        config: { instagram: "", facebook: "", password: "1234" }
+    };
+
+    let imagenesTemp = { carrusel: null, galeria: null, producto: null, logo: null };
+
+    function guardarDatos() { localStorage.setItem("bellavila_admin", JSON.stringify(datos)); actualizarListas(); }
+    
+    function cargarDatos() {
+        let guardado = localStorage.getItem("bellavila_admin");
+        if (guardado) datos = JSON.parse(guardado);
+        actualizarListas();
+        cargarFormularios();
+    }
+
+    function cargarFormularios() {
+        document.getElementById("empNombre").value = datos.empresa.nombre || "";
+        document.getElementById("empWhatsapp").value = datos.empresa.whatsapp || "";
+        document.getElementById("empUbicacion").value = datos.empresa.ubicacion || "";
+        document.getElementById("empEmail").value = datos.empresa.email || "";
+        document.getElementById("empHorario").value = datos.empresa.horario || "";
+        document.getElementById("empMapa").value = datos.empresa.mapa || "";
+        document.getElementById("confInstagram").value = datos.config.instagram || "";
+        document.getElementById("confFacebook").value = datos.config.facebook || "";
+        if (datos.empresa.logo) {
+            document.getElementById("logoPreview").innerHTML = `<div class="preview-mini"><img src="${datos.empresa.logo}"><button onclick="eliminarLogo()">×</button></div>`;
+        }
+    }
+
+    function actualizarListas() {
+        document.getElementById("listaCarrusel").innerHTML = datos.carrusel.map((item, i) => `<div class="item-admin"><div><strong>${item.titulo}</strong><br><small>${item.subtitulo || ""}</small></div><div><button class="btn-warning" onclick="editarCarrusel(${i})">✏️ Editar</button> <button class="btn-danger" onclick="eliminarCarrusel(${i})">🗑️</button></div></div>`).join("");
+        document.getElementById("galeriaCantidad").innerText = datos.galeria.length;
+        document.getElementById("listaGaleria").innerHTML = datos.galeria.map((item, i) => `<div class="item-admin"><div><strong>${item.titulo}</strong><br><small>${item.categoria}</small><br><small>${item.descripcion || ""}</small></div><div><button class="btn-warning" onclick="editarGaleria(${i})">✏️ Editar</button> <button class="btn-danger" onclick="eliminarGaleria(${i})">🗑️</button></div></div>`).join("");
+        document.getElementById("productosCantidad").innerText = datos.productos.length;
+        document.getElementById("listaProductos").innerHTML = datos.productos.map((item, i) => `<div class="item-admin"><div><strong>${item.nombre}</strong> - ${item.precio}<br><small>${item.descripcion.substring(0, 50)}</small><br>${item.destacado ? '⭐ Destacado ' : ''}${item.oferta ? '🎁 Oferta' : ''}</div><div><button class="btn-warning" onclick="editarProducto(${i})">✏️ Editar</button> <button class="btn-danger" onclick="eliminarProducto(${i})">🗑️</button></div></div>`).join("");
+    }
+
+    // LOGO
+    function previewLogoArchivo(input) {
+        let file = input.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                imagenesTemp.logo = e.target.result;
+                document.getElementById("logoPreview").innerHTML = `<div class="preview-mini"><img src="${e.target.result}"><button onclick="eliminarLogo()">×</button></div>`;
+                datos.empresa.logo = imagenesTemp.logo;
+                guardarDatos();
+                alert("✅ Logo guardado");
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+    function eliminarLogo() {
+        datos.empresa.logo = "";
+        document.getElementById("logoPreview").innerHTML = "";
+        guardarDatos();
+        alert("✅ Logo eliminado");
+    }
+    function guardarEmpresa() {
+        let logoUrl = document.getElementById("logoUrl").value.trim();
+        if (logoUrl) {
+            datos.empresa.logo = logoUrl;
+            document.getElementById("logoPreview").innerHTML = `<div class="preview-mini"><img src="${logoUrl}"><button onclick="eliminarLogo()">×</button></div>`;
+        }
+        datos.empresa.nombre = document.getElementById("empNombre").value;
+        datos.empresa.whatsapp = document.getElementById("empWhatsapp").value;
+        datos.empresa.ubicacion = document.getElementById("empUbicacion").value;
+        datos.empresa.email = document.getElementById("empEmail").value;
+        datos.empresa.horario = document.getElementById("empHorario").value;
+        datos.empresa.mapa = document.getElementById("empMapa").value;
+        guardarDatos();
+        alert("✅ Datos guardados");
+    }
+    function guardarConfiguracion() {
+        datos.config.instagram = document.getElementById("confInstagram").value;
+        datos.config.facebook = document.getElementById("confFacebook").value;
+        let nuevaPass = document.getElementById("confPassword").value;
+        if (nuevaPass) datos.config.password = nuevaPass;
+        guardarDatos();
+        alert("✅ Configuración guardada");
+    }
+
+    // CARRUSEL
+    function previewCarArchivo(input) {
+        let file = input.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                imagenesTemp.carrusel = e.target.result;
+                document.getElementById("carPreview").innerHTML = `<div class="preview-mini"><img src="${e.target.result}"><button onclick="eliminarCarPreview()">×</button></div>`;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+    function eliminarCarPreview() { imagenesTemp.carrusel = null; document.getElementById("carPreview").innerHTML = ""; document.getElementById("carImagenFile").value = ""; }
+    function agregarCarrusel() {
+        let titulo = document.getElementById("carTitulo").value.trim();
+        if (!titulo) { alert("❌ Escribe un título"); return; }
+        let imagenFinal = document.getElementById("carImagenUrl").value.trim() || imagenesTemp.carrusel || "";
+        datos.carrusel.push({ id: Date.now(), imagen: imagenFinal, titulo: titulo, subtitulo: document.getElementById("carSubtitulo").value, enlace: document.getElementById("carEnlace").value || "#" });
+        guardarDatos();
+        document.getElementById("carTitulo").value = ""; document.getElementById("carImagenUrl").value = ""; eliminarCarPreview();
+        alert("✅ Slide agregado");
+    }
+    function editarCarrusel(i) {
+        let item = datos.carrusel[i];
+        document.getElementById("editCarruselIndex").value = i;
+        document.getElementById("editCarTitulo").value = item.titulo;
+        document.getElementById("editCarSubtitulo").value = item.subtitulo || "";
+        document.getElementById("editCarEnlace").value = item.enlace || "";
+        document.getElementById("editCarImagen").value = item.imagen || "";
+        document.getElementById("editCarImagenFile").value = "";
+        document.getElementById("modalEditarCarrusel").style.display = "block";
+    }
+    function guardarEdicionCarrusel() {
+        let i = parseInt(document.getElementById("editCarruselIndex").value);
+        let nuevaImagenUrl = document.getElementById("editCarImagen").value.trim();
+        let nuevaImagenFile = document.getElementById("editCarImagenFile").files[0];
+        if (nuevaImagenFile) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                datos.carrusel[i].imagen = e.target.result;
+                datos.carrusel[i].titulo = document.getElementById("editCarTitulo").value;
+                datos.carrusel[i].subtitulo = document.getElementById("editCarSubtitulo").value;
+                datos.carrusel[i].enlace = document.getElementById("editCarEnlace").value;
+                guardarDatos();
+                cerrarModalEdicion("modalEditarCarrusel");
+                alert("✅ Slide actualizado");
+            };
+            reader.readAsDataURL(nuevaImagenFile);
+        } else {
+            datos.carrusel[i].imagen = nuevaImagenUrl || datos.carrusel[i].imagen;
+            datos.carrusel[i].titulo = document.getElementById("editCarTitulo").value;
+            datos.carrusel[i].subtitulo = document.getElementById("editCarSubtitulo").value;
+            datos.carrusel[i].enlace = document.getElementById("editCarEnlace").value;
+            guardarDatos();
+            cerrarModalEdicion("modalEditarCarrusel");
+            alert("✅ Slide actualizado");
+        }
+    }
+    function eliminarCarrusel(i) { if (confirm("¿Eliminar?")) { datos.carrusel.splice(i,1); guardarDatos(); } }
+
+    // GALERÍA
+    function previewGalArchivo(input) {
+        let file = input.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                imagenesTemp.galeria = e.target.result;
+                document.getElementById("galPreview").innerHTML = `<div class="preview-mini"><img src="${e.target.result}"><button onclick="eliminarGalPreview()">×</button></div>`;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+    function eliminarGalPreview() { imagenesTemp.galeria = null; document.getElementById("galPreview").innerHTML = ""; document.getElementById("galImagenFile").value = ""; }
+    function agregarGaleria() {
+        let titulo = document.getElementById("galTitulo").value.trim();
+        if (!titulo) { alert("❌ Escribe un título"); return; }
+        let imagenFinal = document.getElementById("galImagenUrl").value.trim() || imagenesTemp.galeria || "";
+        datos.galeria.push({ id: Date.now(), titulo: titulo, categoria: document.getElementById("galCategoria").value, imagen: imagenFinal, descripcion: document.getElementById("galDescripcion").value || "", oferta: document.getElementById("galOferta").checked });
+        guardarDatos();
+        document.getElementById("galTitulo").value = ""; document.getElementById("galImagenUrl").value = ""; eliminarGalPreview();
+        alert("✅ Foto agregada");
+    }
+    function editarGaleria(i) {
+        let item = datos.galeria[i];
+        document.getElementById("editGaleriaIndex").value = i;
+        document.getElementById("editGalTitulo").value = item.titulo;
+        document.getElementById("editGalDescripcion").value = item.descripcion || "";
+        document.getElementById("editGalCategoria").value = item.categoria;
+        document.getElementById("editGalOferta").checked = item.oferta || false;
+        document.getElementById("editGalImagen").value = item.imagen || "";
+        document.getElementById("editGalImagenFile").value = "";
+        document.getElementById("modalEditarGaleria").style.display = "block";
+    }
+    function guardarEdicionGaleria() {
+        let i = parseInt(document.getElementById("editGaleriaIndex").value);
+        let nuevaImagenUrl = document.getElementById("editGalImagen").value.trim();
+        let nuevaImagenFile = document.getElementById("editGalImagenFile").files[0];
+        if (nuevaImagenFile) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                datos.galeria[i].imagen = e.target.result;
+                datos.galeria[i].titulo = document.getElementById("editGalTitulo").value;
+                datos.galeria[i].categoria = document.getElementById("editGalCategoria").value;
+                datos.galeria[i].descripcion = document.getElementById("editGalDescripcion").value;
+                datos.galeria[i].oferta = document.getElementById("editGalOferta").checked;
+                guardarDatos();
+                cerrarModalEdicion("modalEditarGaleria");
+                alert("✅ Foto actualizada");
+            };
+            reader.readAsDataURL(nuevaImagenFile);
+        } else {
+            datos.galeria[i].imagen = nuevaImagenUrl || datos.galeria[i].imagen;
+            datos.galeria[i].titulo = document.getElementById("editGalTitulo").value;
+            datos.galeria[i].categoria = document.getElementById("editGalCategoria").value;
+            datos.galeria[i].descripcion = document.getElementById("editGalDescripcion").value;
+            datos.galeria[i].oferta = document.getElementById("editGalOferta").checked;
+            guardarDatos();
+            cerrarModalEdicion("modalEditarGaleria");
+            alert("✅ Foto actualizada");
+        }
+    }
+    function eliminarGaleria(i) { if (confirm("¿Eliminar?")) { datos.galeria.splice(i,1); guardarDatos(); } }
+
+    // PRODUCTOS
+    function previewProdArchivo(input) {
+        let file = input.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                imagenesTemp.producto = e.target.result;
+                document.getElementById("prodPreview").innerHTML = `<div class="preview-mini"><img src="${e.target.result}"><button onclick="eliminarProdPreview()">×</button></div>`;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+    function eliminarProdPreview() { imagenesTemp.producto = null; document.getElementById("prodPreview").innerHTML = ""; document.getElementById("prodImagenFile").value = ""; }
+    function agregarProducto() {
+        let nombre = document.getElementById("prodNombre").value.trim();
+        let precio = document.getElementById("prodPrecio").value.trim();
+        if (!nombre || !precio) { alert("❌ Completa nombre y precio"); return; }
+        let imagenFinal = document.getElementById("prodImagenUrl").value.trim() || imagenesTemp.producto || "";
+        datos.productos.push({ id: Date.now(), nombre: nombre, precio: precio, precio_oferta: document.getElementById("prodPrecioOferta").value.trim() || null, descripcion: document.getElementById("prodDescripcion").value || "", destacado: document.getElementById("prodDestacado").checked, oferta: document.getElementById("prodOferta").checked, imagen: imagenFinal });
+        guardarDatos();
+        document.getElementById("prodNombre").value = ""; document.getElementById("prodPrecio").value = ""; document.getElementById("prodPrecioOferta").value = ""; document.getElementById("prodDescripcion").value = ""; document.getElementById("prodImagenUrl").value = ""; eliminarProdPreview(); document.getElementById("prodDestacado").checked = false; document.getElementById("prodOferta").checked = false;
+        alert(`✅ "${nombre}" agregado`);
+    }
+    function editarProducto(i) {
+        let item = datos.productos[i];
+        document.getElementById("editProductoIndex").value = i;
+        document.getElementById("editProdNombre").value = item.nombre;
+        document.getElementById("editProdPrecio").value = item.precio;
+        document.getElementById("editProdPrecioOferta").value = item.precio_oferta || "";
+        document.getElementById("editProdDescripcion").value = item.descripcion;
+        document.getElementById("editProdDestacado").checked = item.destacado || false;
+        document.getElementById("editProdOferta").checked = item.oferta || false;
+        document.getElementById("editProdImagen").value = item.imagen || "";
+        document.getElementById("editProdImagenFile").value = "";
+        document.getElementById("modalEditarProducto").style.display = "block";
+    }
+    function guardarEdicionProducto() {
+        let i = parseInt(document.getElementById("editProductoIndex").value);
+        let nuevaImagenUrl = document.getElementById("editProdImagen").value.trim();
+        let nuevaImagenFile = document.getElementById("editProdImagenFile").files[0];
+        function actualizar(imagen) {
+            datos.productos[i].nombre = document.getElementById("editProdNombre").value;
+            datos.productos[i].precio = document.getElementById("editProdPrecio").value;
+            datos.productos[i].precio_oferta = document.getElementById("editProdPrecioOferta").value.trim() || null;
+            datos.productos[i].descripcion = document.getElementById("editProdDescripcion").value;
+            datos.productos[i].destacado = document.getElementById("editProdDestacado").checked;
+            datos.productos[i].oferta = document.getElementById("editProdOferta").checked;
+            if (imagen !== undefined) datos.productos[i].imagen = imagen;
+            guardarDatos();
+            cerrarModalEdicion("modalEditarProducto");
+            alert("✅ Producto actualizado");
+        }
+        if (nuevaImagenFile) {
+            let reader = new FileReader();
+            reader.onload = function(e) { actualizar(e.target.result); };
+            reader.readAsDataURL(nuevaImagenFile);
+        } else if (nuevaImagenUrl) {
+            actualizar(nuevaImagenUrl);
+        } else {
+            actualizar();
+        }
+    }
+    function eliminarProducto(i) { if (confirm("¿Eliminar?")) { datos.productos.splice(i,1); guardarDatos(); } }
+
+    // EXPORTAR
+    function exportarDatos() {
+        const json = JSON.stringify(datos, null, 2);
+        const blob = new Blob([json], {type: "application/json"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "datos.json";
+        a.click();
+        URL.revokeObjectURL(url);
+        alert("✅ Datos exportados. Sube el archivo datos.json a GitHub.");
+    }
+    
+    // ==================== NUEVA FUNCIÓN: GUARDAR Y EXPORTAR ====================
+    function guardarYExportar() {
+        // 1. Guardar los datos en localStorage
+        guardarDatos();
+        
+        // 2. Exportar y descargar el archivo
+        const json = JSON.stringify(datos, null, 2);
+        const blob = new Blob([json], {type: "application/json"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "datos.json";
+        a.click();
+        URL.revokeObjectURL(url);
+        
+        // 3. Mensaje de confirmación
+        alert("✅ Datos guardados y exportados correctamente.\n\nAhora sube el archivo datos.json a GitHub (reemplaza el anterior).");
+    }
+    
+    function importarDatos() {
+        let input = document.createElement("input");
+        input.type = "file";
+        input.accept = "application/json";
+        input.onchange = function(e) {
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            reader.onload = function(ev) {
+                try {
+                    datos = JSON.parse(ev.target.result);
+                    guardarDatos();
+                    cargarFormularios();
+                    alert("✅ Datos importados");
+                } catch(err) { alert("❌ Error al importar"); }
+            };
+            reader.readAsText(file);
+        };
+        input.click();
+    }
+    function resetearTodo() {
+        if (confirm("⚠️ ¿Eliminar TODOS los datos?")) {
+            localStorage.removeItem("bellavila_admin");
+            location.reload();
+        }
+    }
+    function cerrarModalEdicion(modalId) { document.getElementById(modalId).style.display = "none"; }
+    function mostrarTab(tab) {
+        document.querySelectorAll(".admin-seccion").forEach(s => s.classList.remove("activa"));
+        document.getElementById(`tab-${tab}`).classList.add("activa");
+        document.querySelectorAll(".admin-tab").forEach(t => t.classList.remove("activo"));
+        event.target.classList.add("activo");
+    }
+    cargarDatos();
+</script>
+</body>
+</html>
