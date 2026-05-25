@@ -1,208 +1,56 @@
 {
   "empresa": {
     "nombre": "BellaVila",
-    "whatsapp": "5353602613",
+    "whatsapp": "5351234567",
     "ubicacion": "La Habana, Cuba",
     "email": "bellavila@gmail.com",
     "horario": "Lunes a Sábado 9-8",
-    "mapa": "https://maps.app.goo.gl/tKxD78uQF49NWzMe8",
-    "logo": "https://i.postimg.cc/fbGJ3qFX/image-52.jpg"
+    "mapa": "",
+    "logo": ""
   },
   "carrusel": [
     {
-      "id": 1779734401566,
-      "imagen": "https://i.postimg.cc/sXHV6b6v/IMG-20260225-WA0091.jpg",
-      "titulo": "Descuentos para casi todos los productos",
-      "subtitulo": "",
-      "enlace": "#"
-    },
-    {
-      "id": 1779734433204,
+      "id": 1779733251924,
       "imagen": "https://i.postimg.cc/QtYX4v4g/IMG-20260225-WA0093.jpg",
+      "titulo": "DESCUENTOS PARA CASI TODOS NUESTROS PRODUCTOS",
+      "subtitulo": "",
+      "enlace": "#"
+    },
+    {
+      "id": 1779733302131,
+      "imagen": "https://i.postimg.cc/sXHV6b6v/IMG-20260225-WA0091.jpg",
       "titulo": ".",
       "subtitulo": "",
       "enlace": "#"
     },
     {
-      "id": 1779734460887,
+      "id": 1779733331499,
+      "imagen": "https://i.postimg.cc/gjfGd8PP/IMG-20260521-WA0001.jpg",
+      "titulo": ".",
+      "subtitulo": "",
+      "enlace": "#"
+    },
+    {
+      "id": 1779733374003,
       "imagen": "https://i.postimg.cc/85X1KxKr/IMG-20260225-WA0090.jpg",
-      "titulo": ".",
+      "titulo": "CAKES PERSONALIZADOS",
       "subtitulo": "",
       "enlace": "#"
     },
     {
-      "id": 1779734491492,
+      "id": 1779733399811,
       "imagen": "https://i.postimg.cc/kGV7kwzL/IMG-20260417-WA0023.jpg",
       "titulo": ".",
       "subtitulo": "",
       "enlace": "#"
-    },
-    {
-      "id": 1779734516223,
-      "imagen": "https://i.postimg.cc/gjfGd8PP/IMG-20260521-WA0001.jpg",
-      "titulo": ".",
-      "subtitulo": "",
-      "enlace": "#"
-    },
-    {
-      "id": 1779734566420,
-      "imagen": "https://i.postimg.cc/dQndv0XR/IMG-20260225-WA0057.jpg",
-      "titulo": ".",
-      "subtitulo": "",
-      "enlace": "#"
-    },
-    {
-      "id": 1779735526910,
-      "imagen": "https://i.postimg.cc/2511SLkq/grok-1772243607299.jpg",
-      "titulo": ".",
-      "subtitulo": "",
-      "enlace": "#"
-    },
-    {
-      "id": 1779735584510,
-      "imagen": "https://i.postimg.cc/hGXXtQDb/grok-1772243319392.jpg",
-      "titulo": ".",
-      "subtitulo": "",
-      "enlace": "#"
-    },
-    {
-      "id": 1779735667793,
-      "imagen": "https://i.postimg.cc/3wkkx084/grok-1772244166347.jpg",
-      "titulo": "Productos 100% natturales",
-      "subtitulo": "",
-      "enlace": "#"
-    },
-    {
-      "id": 1779735901946,
-      "imagen": "https://i.postimg.cc/fbGJ3qFX/image-52.jpg",
-      "titulo": ".",
-      "subtitulo": "",
-      "enlace": "#"
     }
   ],
-  "galeria": [
-    {
-      "id": 1779733778989,
-      "titulo": "Dulce historia",
-      "categoria": "cumpleanos",
-      "imagen": "https://i.postimg.cc/3JGqL5z7/IMG-20260225-WA0093.jpg",
-      "descripcion": "",
-      "oferta": false
-    },
-    {
-      "id": 1779733845664,
-      "titulo": "Duo perfecto",
-      "categoria": "corporativo",
-      "imagen": "https://i.postimg.cc/Nfm7Hg2Z/IMG-20260521-WA0000.jpg",
-      "descripcion": "",
-      "oferta": false
-    },
-    {
-      "id": 1779733899749,
-      "titulo": "Compromiso eterno",
-      "categoria": "boda",
-      "imagen": "https://i.postimg.cc/KY0LFCXq/IMG-20260225-WA0091.jpg",
-      "descripcion": "",
-      "oferta": false
-    },
-    {
-      "id": 1779733958537,
-      "titulo": "Dulce sobre ruedas",
-      "categoria": "cumpleanos",
-      "imagen": "https://i.postimg.cc/YqF1gXgt/IMG-20260417-WA0023.jpg",
-      "descripcion": "",
-      "oferta": false
-    },
-    {
-      "id": 1779734051695,
-      "titulo": "Chocolate para todos",
-      "categoria": "corporativo",
-      "imagen": "https://i.postimg.cc/cJKTtnpV/IMG-20260225-WA0035.jpg",
-      "descripcion": "",
-      "oferta": false
-    },
-    {
-      "id": 1779734100670,
-      "titulo": "Reina del río",
-      "categoria": "cumpleanos",
-      "imagen": "https://i.postimg.cc/qqGGHXKs/IMG-20260225-WA0037.jpg",
-      "descripcion": "",
-      "oferta": false
-    },
-    {
-      "id": 1779734138140,
-      "titulo": "Ala Madrid",
-      "categoria": "cumpleanos",
-      "imagen": "https://i.postimg.cc/tCX5tw0h/IMG-20260225-WA0038.jpg",
-      "descripcion": "",
-      "oferta": false
-    },
-    {
-      "id": 1779734205695,
-      "titulo": "Doble tentacion",
-      "categoria": "corporativo",
-      "imagen": "https://i.postimg.cc/7hpqD0yx/IMG-20260521-WA0002.jpg",
-      "descripcion": "",
-      "oferta": false
-    },
-    {
-      "id": 1779734278996,
-      "titulo": "Regalo tierno",
-      "categoria": "cumpleanos",
-      "imagen": "https://i.postimg.cc/gjfGd8PP/IMG-20260521-WA0001.jpg",
-      "descripcion": "",
-      "oferta": false
-    },
-    {
-      "id": 1779734337585,
-      "titulo": "Cake Harry",
-      "categoria": "cumpleanos",
-      "imagen": "https://i.postimg.cc/85X1KxKr/IMG-20260225-WA0090.jpg",
-      "descripcion": "",
-      "oferta": false
-    },
-    {
-      "id": 1779735722128,
-      "titulo": "Aroma de vainilla",
-      "categoria": "cumpleanos",
-      "imagen": "https://i.postimg.cc/VN2drsvn/grok-1771613795672.jpg",
-      "descripcion": "",
-      "oferta": false
-    },
-    {
-      "id": 1779735816427,
-      "titulo": "Sexteto para compartir",
-      "categoria": "cumpleanos",
-      "imagen": "https://i.postimg.cc/3wkkx084/grok-1772244166347.jpg",
-      "descripcion": "",
-      "oferta": false
-    }
-  ],
-  "productos": [
-    {
-      "id": 1779727679103,
-      "nombre": "Cakes de 2 pisos",
-      "precio": "65 USD",
-      "precio_oferta": "60 USD",
-      "descripcion": "Medidas \nBase /25 cm  de diámetro\nSuperior /15 cm \n6 bizcochos  y 4 rellenos ",
-      "destacado": true,
-      "oferta": true,
-      "imagen": "https://i.postimg.cc/Fz2pQzdk/IMG-20260517-WA0015.jpg"
-    },
-    {
-      "id": 1779727949527,
-      "nombre": "Cake de 3 pisos",
-      "precio": "80 USD",
-      "precio_oferta": null,
-      "descripcion": "Medidas\nBase 25 cm de diámetro \nSegundo 20 cm de diámetro \nSuperior 12 cm de diámetro \n9 bizcochos y 6 rellenos",
-      "destacado": false,
-      "oferta": false,
-      "imagen": "https://i.postimg.cc/MZ46y2f9/IMG-20260521-WA0022.jpg"
-    }
-  ],
+  "galeria": [],
+  "productos": [],
   "config": {
     "instagram": "",
     "facebook": "",
     "password": "1234"
-  }
+  },
+  "clientes": []
 }
