@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <meta name="theme-color" content="#0D0D0D">
-    <title>BellaVila | Cakes Artesanales</title>
+    <title id="pageTitle">BellaVila | Cakes Artesanales</title>
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/1046/1046784.png">
     <style>
-        /* [MANTÉN TUS ESTILOS EXACTAMENTE IGUALES - NO LOS MODIFICO] */
+        /* [TUS ESTILOS - MANTENIDOS] */
         * {
             margin: 0;
             padding: 0;
@@ -222,7 +222,7 @@
         }
 
         .hero h2 {
-            font-size: 42px;
+            font-size: 52px;
             font-weight: 700;
             letter-spacing: -1px;
             background: linear-gradient(135deg, var(--gold) 0%, #fff 70%);
@@ -655,9 +655,10 @@
     <div id="carruselContainer" class="carrusel-container"></div>
 </div>
 
+<!-- ✅ SECCIÓN HERO - AHORA EL NOMBRE SE CARGA DESDE datos.json -->
 <div class="hero" id="inicio">
-    <h2>Cakes que endulzan tus momentos</h2>
-    <p>Hechos a mano en Cuba con ingredientes naturales</p>
+    <h2 id="heroNombre">BellaVila</h2>
+    <p id="heroFrase">Cakes que endulzan tus momentos | Hechos a mano en Cuba con ingredientes naturales</p>
     <button onclick="mostrarPagina('productos')">Ver catálogo →</button>
 </div>
 
@@ -779,7 +780,6 @@
             if (respuesta.ok) {
                 datosGlobales = await respuesta.json();
                 console.log("✅ Datos cargados");
-                // Si hay clientes en datos.json, actualizar localStorage
                 if (datosGlobales.clientes && datosGlobales.clientes.length > 0) {
                     localStorage.setItem("clientesBella", JSON.stringify(datosGlobales.clientes));
                 }
@@ -795,6 +795,7 @@
     }
     
     function actualizarTodo() {
+        actualizarNombreSitio();  // 🔥 NUEVO: actualiza el nombre del sitio desde datos.json
         actualizarCarrusel();
         actualizarProductos();
         actualizarGaleria();
@@ -802,6 +803,38 @@
         actualizarRedesSociales();
         actualizarLogo();
         document.getElementById("textoNosotros").innerText = textoNosotros;
+    }
+    
+    // 🔥 NUEVA FUNCIÓN: Actualiza el nombre del sitio desde empresa.nombre_sitio
+    function actualizarNombreSitio() {
+        let nombreSitio = "BellaVila"; // valor por defecto
+        
+        if (datosGlobales.empresa && datosGlobales.empresa.nombre_sitio && datosGlobales.empresa.nombre_sitio !== "") {
+            nombreSitio = datosGlobales.empresa.nombre_sitio;
+        } else if (datosGlobales.nombre_sitio) {
+            nombreSitio = datosGlobales.nombre_sitio;
+        }
+        
+        // Actualizar el HERO (título principal)
+        let heroNombre = document.getElementById("heroNombre");
+        if (heroNombre) heroNombre.innerText = nombreSitio;
+        
+        // Actualizar el texto del logo (respaldo si no hay imagen)
+        let logoSoloTexto = document.getElementById("logoSoloTexto");
+        if (logoSoloTexto) logoSoloTexto.innerText = nombreSitio;
+        
+        // Actualizar el título de la pestaña del navegador
+        let pageTitle = document.getElementById("pageTitle");
+        if (pageTitle) pageTitle.innerText = nombreSitio + " | Cakes Artesanales";
+        
+        // Actualizar el footer
+        let footerCopyright = document.querySelector(".footer p");
+        if (footerCopyright) {
+            let anio = new Date().getFullYear();
+            footerCopyright.innerHTML = `© ${anio} ${nombreSitio} | Cakes Artesanales Cuba`;
+        }
+        
+        console.log("Nombre del sitio actualizado a:", nombreSitio);
     }
     
     function actualizarLogo() {
@@ -821,7 +854,7 @@
             let img = document.createElement("img");
             img.src = logoUrl;
             img.className = "logo-img";
-            img.alt = "Logo BellaVila";
+            img.alt = "Logo";
             img.onerror = () => { 
                 img.style.display = "none"; 
                 texto.style.display = "inline-block"; 
@@ -1048,7 +1081,6 @@
         mostrarToast("✅ Mensaje enviado");
     }
     
-    // ==================== REGISTRO DE CLIENTES CORREGIDO ====================
     function registrarCliente() {
         let n = document.getElementById("regNombre").value.trim();
         let t = document.getElementById("regTelefono").value.trim();
@@ -1062,7 +1094,6 @@
             return; 
         }
         
-        // Obtener clientes actuales (desde datosGlobales o localStorage)
         let clientesActuales = [];
         if (datosGlobales.clientes && datosGlobales.clientes.length > 0) {
             clientesActuales = datosGlobales.clientes;
@@ -1082,7 +1113,6 @@
         let nuevoCliente = { id: Date.now(), nombre: n, telefono: t, fecha: new Date().toLocaleString() };
         clientesActuales.push(nuevoCliente);
         
-        // Guardar en localStorage y en datosGlobales
         localStorage.setItem("clientesBella", JSON.stringify(clientesActuales));
         if (!datosGlobales.clientes) datosGlobales.clientes = [];
         datosGlobales.clientes = clientesActuales;
@@ -1096,7 +1126,6 @@
         
         mostrarToast("✅ Registrado correctamente. ¡Gracias!");
         
-        // Mostrar mensaje al admin (opcional)
         console.log("Nuevo cliente registrado:", nuevoCliente);
     }
     
