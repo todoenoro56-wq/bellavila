@@ -45,7 +45,16 @@
       "enlace": "#"
     }
   ],
-  "galeria": [],
+  "galeria": [
+    {
+      "id": 1779753093847,
+      "titulo": "Dulce araña",
+      "categoria": "cumpleanos",
+      "imagen": "https://i.postimg.cc/5NYtGNMd/IMG-20260225-WA0079.jpg",
+      "descripcion": "",
+      "oferta": false
+    }
+  ],
   "productos": [],
   "config": {
     "instagram": "",
