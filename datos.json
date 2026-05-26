@@ -6,7 +6,7 @@
     "email": "bellavila@gmail.com",
     "horario": "Lunes a Sábado 9-8",
     "mapa": "",
-    "logo": "https://i.postimg.cc/fbGJ3qFX/image-52.jpg"
+    "logo": "https://i.postimg.cc/MTnWj5DV/image-66-1.jpg"
   },
   "carrusel": [
     {
@@ -242,16 +242,6 @@
       "imagen": "https://i.postimg.cc/SRXmwV33/IMG-20260520-WA0041.jpg"
     },
     {
-      "id": 1779758336428,
-      "nombre": "CAKE DE 3 PISOS",
-      "precio": "85 USD",
-      "precio_oferta": "80 USD",
-      "descripcion": "BASE DE 25CM DE DIAMETRO /SEGUNDO 20CM DE DIAMETRO / SUPERIOR 12CM \n 6 RELLENOS Y 9 BIZCOCHOS ",
-      "destacado": false,
-      "oferta": true,
-      "imagen": "https://i.postimg.cc/MZ46y2f9/IMG-20260521-WA0022.jpg"
-    },
-    {
       "id": 1779758480460,
       "nombre": "CAKE  CON BOTELLA",
       "precio": "45 USD",
@@ -340,6 +330,26 @@
       "destacado": false,
       "oferta": false,
       "imagen": "https://i.postimg.cc/85X1KxKr/IMG-20260225-WA0090.jpg"
+    },
+    {
+      "id": 1779765733041,
+      "nombre": "PITZZA NAPOLITANA FAMILIAR",
+      "precio": "10USD",
+      "precio_oferta": "8USD",
+      "descripcion": "PITZZA NAPOLITANA FAMILIAR DE QUESO GOUDA \nMEDIDAS / 40CM *40CM ",
+      "destacado": true,
+      "oferta": true,
+      "imagen": "https://i.postimg.cc/RVRj4f1F/image-154-1.jpg"
+    },
+    {
+      "id": 1779765865520,
+      "nombre": "CAKE DE 3 PISOS",
+      "precio": "85USD",
+      "precio_oferta": "80USD",
+      "descripcion": "BASE DE 25CM DE DIAMETRO /SEGUNDO 20CM DE DIAMETRO / SUPERIOR 12CM \n 6 RELLENOS Y 9 BIZCOCHOS ",
+      "destacado": false,
+      "oferta": true,
+      "imagen": "https://i.postimg.cc/MZ46y2f9/IMG-20260521-WA0022.jpg"
     }
   ],
   "config": {
