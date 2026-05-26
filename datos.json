@@ -72,5 +72,12 @@
     "facebook": "",
     "password": "1234"
   },
-  "clientes": []
+  "clientes": [
+    {
+      "id": 1779754835054,
+      "nombre": "Alci",
+      "telefono": "5355513981",
+      "fecha": "25/5/2026, 20:20:35"
+    }
+  ]
 }
