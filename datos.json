@@ -32,7 +32,7 @@
     },
     {
       "id": 1779733374003,
-      "imagen": "https://i.postimg.cc/85X1KxKr/IMG-20260225-WA0090.jpg",
+      "imagen": "https://i.postimg.cc/hGXXtQDb/grok-1772243319392.jpg",
       "titulo": "CAKES PERSONALIZADOS",
       "subtitulo": "",
       "enlace": "#"
@@ -40,6 +40,27 @@
     {
       "id": 1779733399811,
       "imagen": "https://i.postimg.cc/kGV7kwzL/IMG-20260417-WA0023.jpg",
+      "titulo": ".",
+      "subtitulo": "",
+      "enlace": "#"
+    },
+    {
+      "id": 1779760920435,
+      "imagen": "https://i.postimg.cc/2511SLkq/grok-1772243607299.jpg",
+      "titulo": ".",
+      "subtitulo": "",
+      "enlace": "#"
+    },
+    {
+      "id": 1779760938826,
+      "imagen": "https://i.postimg.cc/3wkkx084/grok-1772244166347.jpg",
+      "titulo": ".",
+      "subtitulo": "",
+      "enlace": "#"
+    },
+    {
+      "id": 1779760989290,
+      "imagen": "https://i.postimg.cc/fbGJ3qFX/image-52.jpg",
       "titulo": ".",
       "subtitulo": "",
       "enlace": "#"
@@ -249,6 +270,76 @@
       "destacado": true,
       "oferta": true,
       "imagen": "https://i.postimg.cc/SRvDsjwg/IMG-20260521-WA0021.jpg"
+    },
+    {
+      "id": 1779761842298,
+      "nombre": "PASTEL  BOMBON",
+      "precio": "15 USD -25 USD -40 USD",
+      "precio_oferta": null,
+      "descripcion": "CLASICO /15CM DE DIAMETRO  15USD \nBOMBON  /20CM *10CM        25USD\nSUPER BOMBON  /20CM *20CM  40USD ",
+      "destacado": false,
+      "oferta": false,
+      "imagen": "https://i.postimg.cc/cJKTtnpV/IMG-20260225-WA0035.jpg"
+    },
+    {
+      "id": 1779762060946,
+      "nombre": "CAKE DE CONFITURA",
+      "precio": "18 USD -35USD",
+      "precio_oferta": null,
+      "descripcion": "NATA /MASA DE VAINILLA /CHOCO\nCLASICO /2 MASAS 1 RELLENO   18 USD \nSUPER CONFI /3 MASAS 2 RELLENOS  35 USD ",
+      "destacado": false,
+      "oferta": false,
+      "imagen": "https://i.postimg.cc/vTm4DWjH/IMG-20260225-WA0064.jpg"
+    },
+    {
+      "id": 1779762530546,
+      "nombre": "TARTA DE CONFITURAS",
+      "precio": "18USD -28USD",
+      "precio_oferta": "15USD -25 USD",
+      "descripcion": "1- TARTA CLASICA \n   MASA DE VAINILLA , DULCE DE LECHE MAS CONFITURAS 18USD \n2- SUPER TARTA \n   MASA TRES LECHES , DULCE DE LECHE MAS CONFITURAS 28 USD ",
+      "destacado": false,
+      "oferta": true,
+      "imagen": "https://i.postimg.cc/Kj9g59Bh/IMG-20260225-WA0056.jpg"
+    },
+    {
+      "id": 1779762864146,
+      "nombre": "BRAZO GITANO",
+      "precio": "28USD",
+      "precio_oferta": "25USD",
+      "descripcion": "MASA /VAINILLA O CHOCOLATE \nCLASICO /RELLENO CON CREMA ,BOMBONES Y FRUTOS SECOS \n2 CAPAS DE COBERTURA CON FRUTOS SECOS              ",
+      "destacado": false,
+      "oferta": true,
+      "imagen": "https://i.postimg.cc/d0BQdhG6/IMG-20260225-WA0086.jpg"
+    },
+    {
+      "id": 1779763204953,
+      "nombre": "CAKE DE CORAZON",
+      "precio": "20USD -38USD",
+      "precio_oferta": "18USD -35USD",
+      "descripcion": "1-CLASICO / 2 MASAS 1 RELLENO /20CM DE DIAMETRO POR 8CM EN ALTO -20USD\n2-SUPER CORAZON /3 MASAS 2 RELLENOS / 20CM DE DIAMETRO POR 20CM -38USD ",
+      "destacado": false,
+      "oferta": true,
+      "imagen": "https://i.postimg.cc/5NYtGNMd/IMG-20260225-WA0079.jpg"
+    },
+    {
+      "id": 1779763444969,
+      "nombre": "CAKE DE 15CM/ MERENGUE -NATA",
+      "precio": "8USD-10USD",
+      "precio_oferta": null,
+      "descripcion": "MEDIDAS \n1-15CM DE DIAMETRO POR 8CM DE ALTO   -8USD-10USD\n2-15CM DE DIAMETRO POR 20CM DE ALTO  -18USD-20USD",
+      "destacado": false,
+      "oferta": false,
+      "imagen": "https://i.postimg.cc/LsJJ8g95/image.jpg"
+    },
+    {
+      "id": 1779763714793,
+      "nombre": "CAKE DE 20CM /MERENGUE -NATA",
+      "precio": "15USD-18USD/20USD-25USD/30USD-35USD",
+      "precio_oferta": null,
+      "descripcion": "MEDIDAS \n1-20CM DE DIAMETRO POR 8CM DE ALTO    -15USD-18USD\n2-20CM DE DIAMETRO POR 12CM DE ALTO   -20USD-25USD\n3--20CM DE DIAMETRO POR 20CM DE ALTO  -30USD-35USD",
+      "destacado": false,
+      "oferta": false,
+      "imagen": "https://i.postimg.cc/85X1KxKr/IMG-20260225-WA0090.jpg"
     }
   ],
   "config": {
