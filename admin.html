@@ -179,19 +179,20 @@
         <div id="listaProductos" class="lista-items"></div>
     </div>
 
-    <!-- ==================== CLIENTES (AHORA GUARDADOS EN datos.clientes) ==================== -->
+    <!-- CLIENTES (CORREGIDO) -->
     <div id="tab-clientes" class="admin-seccion">
         <h3>👥 Clientes Registrados</h3>
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
             <p>Total: <strong id="totalClientes">0</strong> clientes</p>
             <div>
+                <button class="btn" onclick="sincronizarClientes()" style="background: #2196F3; color: white;">🔄 Sincronizar ahora</button>
                 <button class="btn" onclick="notificarATodos()" style="background: #25D366; color: white;">📢 Notificar a todos</button>
                 <button class="btn btn-danger" onclick="eliminarTodosClientes()">🗑️ Eliminar todos</button>
             </div>
         </div>
         <div id="listaClientes" class="lista-items"></div>
         <p style="font-size: 12px; color: #888; margin-top: 10px;">
-            💡 Los clientes se guardan en datos.json. Al exportar, se incluirán automáticamente.
+            💡 Los clientes se guardan automáticamente. Usa el botón "Sincronizar ahora" si ves clientes faltantes.
         </p>
     </div>
 
@@ -280,34 +281,62 @@
         carrusel: [],
         galeria: [],
         productos: [],
-        clientes: [],  // <-- NUEVO: Clientes se guardan aquí
+        clientes: [],
         config: { instagram: "", facebook: "", password: "1234" }
     };
 
     let imagenesTemp = { carrusel: null, galeria: null, producto: null, logo: null };
-    
-    // ==================== CLIENTES (guardados en datos.clientes) ====================
-    function cargarClientes() {
-        // Primero intentar cargar desde datos.clientes (desde importación)
-        if (datos.clientes && datos.clientes.length > 0) {
+    let clientes = [];
+
+    // ==================== FUNCIÓN PRINCIPAL CORREGIDA ====================
+    function cargarDatos() {
+        let guardado = localStorage.getItem("bellavila_admin");
+        if (guardado) {
+            datos = JSON.parse(guardado);
+            if (!datos.clientes) datos.clientes = [];
             clientes = datos.clientes;
         } else {
-            // Si no hay, cargar desde localStorage (migración)
-            let clientesGuardados = localStorage.getItem("clientesBella");
-            if (clientesGuardados) {
-                clientes = JSON.parse(clientesGuardados);
-                // Migrar a datos.clientes
-                datos.clientes = clientes;
-                guardarDatos();
-            } else {
-                clientes = [];
-                datos.clientes = [];
-            }
+            datos.clientes = [];
+            clientes = [];
         }
+        
+        // 🔥 SINCRONIZAR CLIENTES DESDE localStorage (donde los guarda index.html)
+        sincronizarClientesDesdeLocalStorage();
+        
+        actualizarListas();
+        cargarFormularios();
         actualizarListaClientes();
     }
-
-    let clientes = [];
+    
+    // Nueva función para sincronizar clientes desde localStorage
+    function sincronizarClientesDesdeLocalStorage() {
+        let clientesLocal = localStorage.getItem("clientesBella");
+        if (clientesLocal) {
+            let clientesNuevos = JSON.parse(clientesLocal);
+            if (clientesNuevos && clientesNuevos.length > 0) {
+                let huboCambios = false;
+                let telefonosExistentes = new Set(clientes.map(c => c.telefono));
+                for (let cliente of clientesNuevos) {
+                    if (!telefonosExistentes.has(cliente.telefono)) {
+                        clientes.push(cliente);
+                        huboCambios = true;
+                    }
+                }
+                if (huboCambios) {
+                    datos.clientes = clientes;
+                    guardarDatos();
+                    console.log("✅ Clientes sincronizados desde localStorage:", clientes.length);
+                }
+            }
+        }
+    }
+    
+    // Botón manual para sincronizar
+    function sincronizarClientes() {
+        sincronizarClientesDesdeLocalStorage();
+        actualizarListaClientes();
+        alert(`✅ Sincronización completada. Total: ${clientes.length} clientes.`);
+    }
 
     function actualizarListaClientes() {
         const listaDiv = document.getElementById("listaClientes");
@@ -325,7 +354,7 @@
         listaDiv.innerHTML = clientes.map((cliente, index) => `
             <div class="item-admin">
                 <div class="cliente-info">
-                    <span class="cliente-nombre">🧑 ${cliente.nombre}</span>
+                    <span class="cliente-nombre">🧑 ${escapeHtml(cliente.nombre)}</span>
                     <span class="cliente-telefono">📱 ${cliente.telefono}</span>
                     <span class="cliente-fecha">📅 ${cliente.fecha || "Fecha no registrada"}</span>
                 </div>
@@ -337,7 +366,7 @@
     function eliminarCliente(index) {
         if (confirm(`¿Eliminar a ${clientes[index].nombre} de la lista de clientes?`)) {
             clientes.splice(index, 1);
-            datos.clientes = clientes;  // Actualizar en datos
+            datos.clientes = clientes;
             guardarDatos();
             localStorage.setItem("clientesBella", JSON.stringify(clientes));
             actualizarListaClientes();
@@ -366,36 +395,19 @@
         
         if (mensaje) {
             const mensajeCodificado = encodeURIComponent(mensaje);
-            clientes.forEach(cliente => {
+            for (let cliente of clientes) {
                 window.open(`https://wa.me/${cliente.telefono}?text=${mensajeCodificado}`, "_blank");
-            });
-            alert(`✅ Se abrirán ${clientes.length} pestañas de WhatsApp para enviar el mensaje.`);
+            }
+            alert(`✅ Se abrirán ${clientes.length} pestañas de WhatsApp.`);
         }
     }
 
     function guardarDatos() { 
         localStorage.setItem("bellavila_admin", JSON.stringify(datos)); 
-        // También guardar clientes en localStorage separado para compatibilidad con index.html
         localStorage.setItem("clientesBella", JSON.stringify(clientes));
         actualizarListas(); 
     }
     
-    function cargarDatos() {
-        let guardado = localStorage.getItem("bellavila_admin");
-        if (guardado) {
-            datos = JSON.parse(guardado);
-            // Asegurar que datos.clientes existe
-            if (!datos.clientes) datos.clientes = [];
-            clientes = datos.clientes;
-        } else {
-            datos.clientes = [];
-            clientes = [];
-        }
-        actualizarListas();
-        cargarFormularios();
-        actualizarListaClientes();
-    }
-
     function cargarFormularios() {
         document.getElementById("empNombre").value = datos.empresa.nombre || "";
         document.getElementById("empWhatsapp").value = datos.empresa.whatsapp || "";
@@ -411,11 +423,21 @@
     }
 
     function actualizarListas() {
-        document.getElementById("listaCarrusel").innerHTML = datos.carrusel.map((item, i) => `<div class="item-admin"><div><strong>${item.titulo}</strong><br><small>${item.subtitulo || ""}</small></div><div><button class="btn-warning" onclick="editarCarrusel(${i})">✏️ Editar</button> <button class="btn-danger" onclick="eliminarCarrusel(${i})">🗑️</button></div></div>`).join("");
+        document.getElementById("listaCarrusel").innerHTML = datos.carrusel.map((item, i) => `<div class="item-admin"><div><strong>${escapeHtml(item.titulo)}</strong><br><small>${escapeHtml(item.subtitulo || "")}</small></div><div><button class="btn-warning" onclick="editarCarrusel(${i})">✏️ Editar</button> <button class="btn-danger" onclick="eliminarCarrusel(${i})">🗑️</button></div></div>`).join("");
         document.getElementById("galeriaCantidad").innerText = datos.galeria.length;
-        document.getElementById("listaGaleria").innerHTML = datos.galeria.map((item, i) => `<div class="item-admin"><div><strong>${item.titulo}</strong><br><small>${item.categoria}</small><br><small>${item.descripcion || ""}</small></div><div><button class="btn-warning" onclick="editarGaleria(${i})">✏️ Editar</button> <button class="btn-danger" onclick="eliminarGaleria(${i})">🗑️</button></div></div>`).join("");
+        document.getElementById("listaGaleria").innerHTML = datos.galeria.map((item, i) => `<div class="item-admin"><div><strong>${escapeHtml(item.titulo)}</strong><br><small>${escapeHtml(item.categoria)}</small><br><small>${escapeHtml(item.descripcion || "")}</small></div><div><button class="btn-warning" onclick="editarGaleria(${i})">✏️ Editar</button> <button class="btn-danger" onclick="eliminarGaleria(${i})">🗑️</button></div></div>`).join("");
         document.getElementById("productosCantidad").innerText = datos.productos.length;
-        document.getElementById("listaProductos").innerHTML = datos.productos.map((item, i) => `<div class="item-admin"><div><strong>${item.nombre}</strong> - ${item.precio}<br><small>${item.descripcion.substring(0, 50)}</small><br>${item.destacado ? '⭐ Destacado ' : ''}${item.oferta ? '🎁 Oferta' : ''}</div><div><button class="btn-warning" onclick="editarProducto(${i})">✏️ Editar</button> <button class="btn-danger" onclick="eliminarProducto(${i})">🗑️</button></div></div>`).join("");
+        document.getElementById("listaProductos").innerHTML = datos.productos.map((item, i) => `<div class="item-admin"><div><strong>${escapeHtml(item.nombre)}</strong> - ${escapeHtml(item.precio)}<br><small>${escapeHtml(item.descripcion?.substring(0, 50) || "")}</small><br>${item.destacado ? '⭐ Destacado ' : ''}${item.oferta ? '🎁 Oferta' : ''}</div><div><button class="btn-warning" onclick="editarProducto(${i})">✏️ Editar</button> <button class="btn-danger" onclick="eliminarProducto(${i})">🗑️</button></div></div>`).join("");
+    }
+
+    function escapeHtml(str) {
+        if (!str) return "";
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
     }
 
     // LOGO
@@ -650,9 +672,8 @@
     }
     function eliminarProducto(i) { if (confirm("¿Eliminar?")) { datos.productos.splice(i,1); guardarDatos(); } }
 
-    // EXPORTAR (INCLUYE CLIENTES AUTOMÁTICAMENTE)
+    // EXPORTAR (incluye clientes)
     function exportarDatos() {
-        // Asegurar que los clientes están en datos antes de exportar
         datos.clientes = clientes;
         const json = JSON.stringify(datos, null, 2);
         const blob = new Blob([json], {type: "application/json"});
@@ -662,14 +683,12 @@
         a.download = "datos.json";
         a.click();
         URL.revokeObjectURL(url);
-        alert("✅ Datos exportados (incluye productos, galería, carrusel y CLIENTES). Sube el archivo datos.json a GitHub.");
+        alert("✅ Datos exportados (incluye clientes). Sube el archivo datos.json a GitHub.");
     }
     
     function guardarYExportar() {
-        // Guardar datos actuales
         datos.clientes = clientes;
         guardarDatos();
-        
         const json = JSON.stringify(datos, null, 2);
         const blob = new Blob([json], {type: "application/json"});
         const url = URL.createObjectURL(blob);
@@ -678,8 +697,7 @@
         a.download = "datos.json";
         a.click();
         URL.revokeObjectURL(url);
-        
-        alert("✅ Datos guardados y exportados correctamente (incluye CLIENTES).\n\nAhora sube el archivo datos.json a GitHub (reemplaza el anterior).");
+        alert("✅ Datos guardados y exportados correctamente (incluye CLIENTES).\n\nAhora sube el archivo datos.json a GitHub.");
     }
     
     function importarDatos() {
@@ -692,10 +710,10 @@
             reader.onload = function(ev) {
                 try {
                     datos = JSON.parse(ev.target.result);
-                    // Asegurar que existe la propiedad clientes
                     if (!datos.clientes) datos.clientes = [];
                     clientes = datos.clientes;
                     guardarDatos();
+                    localStorage.setItem("clientesBella", JSON.stringify(clientes));
                     cargarFormularios();
                     actualizarListaClientes();
                     alert("✅ Datos importados correctamente (incluye clientes)");
@@ -713,13 +731,16 @@
             location.reload();
         }
     }
+    
     function cerrarModalEdicion(modalId) { document.getElementById(modalId).style.display = "none"; }
+    
     function mostrarTab(tab) {
         document.querySelectorAll(".admin-seccion").forEach(s => s.classList.remove("activa"));
         document.getElementById(`tab-${tab}`).classList.add("activa");
         document.querySelectorAll(".admin-tab").forEach(t => t.classList.remove("activo"));
         event.target.classList.add("activo");
     }
+    
     cargarDatos();
 </script>
 </body>
